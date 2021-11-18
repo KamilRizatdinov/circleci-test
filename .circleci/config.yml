@@ -38,7 +38,7 @@ jobs:
             echo $TESTFILES | tr ' ' '\n'
             yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
           environment:
-            JEST_JUNIT_OUTPUT: reports/junit/js-test-results-{$CIRCLE_NODE_INDEX}.xml
+            JEST_JUNIT_OUTPUT_FILE: reports/junit/js-test-results-{$CIRCLE_NODE_INDEX}.xml
 
       - store_test_results:
           path: reports/junit
