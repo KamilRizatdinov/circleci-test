@@ -43,3 +43,8 @@ jobs:
 
       - store_artifacts:
           path: reports/junit
+
+      - run:
+          name: checking coverage reports
+          command: |
+            ls coverage
