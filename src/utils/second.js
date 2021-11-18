@@ -1,4 +1,4 @@
-export function second(string) {
+module.exports = function second(string) {
   if (string) {
     return string;
   }

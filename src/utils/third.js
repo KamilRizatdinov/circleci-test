@@ -1,4 +1,4 @@
-export function third(string) {
+module.exports = function third(string) {
   if (string) {
     return string;
   }
