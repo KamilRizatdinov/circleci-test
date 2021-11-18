@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:12.9.1-browsers
+
+    parallelism: 4
   
     working_directory: ~/repo
 
@@ -14,7 +16,9 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       
-      - run: yarn install --ignore-engines
+      - run: 
+          name: yarn install
+          command: yarn install --ignore-engines
 
       - save_cache:
           paths:
@@ -24,4 +28,14 @@ jobs:
           
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: yarn test
+      - run: 
+          name: yarn test
+          command: |
+            TESTFILES=$(circleci tests glob "src/tests/*.{js,ts,tsx}")
+            echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+            TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+            echo Worker $CIRCLE_NODE_INDEX test files
+            echo $TESTFILES | tr ' ' '\n'
+            yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: reports/junit/js-test-results.xml
