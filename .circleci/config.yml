@@ -36,9 +36,7 @@ jobs:
             TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
             echo Worker $CIRCLE_NODE_INDEX test files
             echo $TESTFILES | tr ' ' '\n'
-            yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT_FILE: reports/junit/js-test-results-{$CIRCLE_NODE_INDEX}.xml
+            JEST_JUNIT_OUTPUT_FILE=reports/junit/js-test-results-{$CIRCLE_NODE_INDEX}.xml yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
 
       - store_test_results:
           path: reports/junit
