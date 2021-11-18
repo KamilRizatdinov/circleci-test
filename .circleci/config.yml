@@ -47,4 +47,7 @@ jobs:
       - run:
           name: checking coverage reports
           command: |
-            ls coverage
+            echo Worker $CIRCLE_NODE_INDEX coverage report
+            cat coverage/coverage-final.json
+            echo Worker $CIRCLE_NODE_INDEX junit result
+            cat reports/junit/js-test-results-$CIRCLE_NODE_INDEX-$CIRCLE_NODE_TOTAL.xml
