@@ -45,7 +45,7 @@ jobs:
           path: reports/junit
       
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
             - coverage
 
@@ -60,7 +60,7 @@ jobs:
       - image: circleci/node:12.9.1-browsers
     steps:
       - attach_workspace:
-          at: ~/
+          at: .
       
       - run:
           name: List coverage content
