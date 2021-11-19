@@ -43,9 +43,26 @@ jobs:
 
       - store_artifacts:
           path: reports/junit
+      
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - coverage
 
       - run:
           name: Checking coverage reports
           command: |
             mv coverage/coverage-final.json coverage/coverage-final-$CIRCLE_NODE_INDEX.json
+            ls coverage
+  
+  report:
+    docker:
+      - image: circleci/node:12.9.1-browsers
+    steps:
+      - attach_workspace:
+          at: ~/
+      
+      - run:
+          name: List coverage content
+          command: |
             ls coverage
