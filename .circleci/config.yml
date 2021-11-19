@@ -36,7 +36,7 @@ jobs:
             TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
             echo Worker $CIRCLE_NODE_INDEX test files
             echo $TESTFILES | tr ' ' '\n'
-            JEST_JUNIT_OUTPUT_FILE=reports/junit/js-test-results-$CIRCLE_NODE_INDEX-$CIRCLE_NODE_TOTAL.xml yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
+            JEST_JUNIT_OUTPUT_FILE=reports/junit/js-test-results-$CIRCLE_NODE_INDEX.xml yarn test $TESTFILES --coverage --ci -i --reporters=default --reporters=jest-junit
 
       - store_test_results:
           path: reports/junit
@@ -45,9 +45,12 @@ jobs:
           path: reports/junit
 
       - run:
-          name: checking coverage reports
+          name: Checking coverage reports
           command: |
-            echo Worker $CIRCLE_NODE_INDEX coverage report
-            cat coverage/coverage-final.json
-            echo Worker $CIRCLE_NODE_INDEX junit result
-            cat reports/junit/js-test-results-$CIRCLE_NODE_INDEX-$CIRCLE_NODE_TOTAL.xml
+            mv coverage/coverage-final.json coverage/coverage-final-$CIRCLE_NODE_INDEX.json
+            ls coverage/coverage-final.json
+      
+      - run: 
+          name: Merging coverage reports
+          command: |
+            
