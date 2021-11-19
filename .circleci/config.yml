@@ -48,4 +48,4 @@ jobs:
           name: Checking coverage reports
           command: |
             mv coverage/coverage-final.json coverage/coverage-final-$CIRCLE_NODE_INDEX.json
-            ls coverage/coverage-final.json  
+            ls coverage
