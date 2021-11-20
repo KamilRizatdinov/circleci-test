@@ -4,14 +4,12 @@ const istanbulCoverage = require('istanbul-lib-coverage');
 const map = istanbulCoverage.createCoverageMap();
 const reporter = createReporter();
 
-const countries = ['chile', 'peru'];
-
-countries.forEach(country => {
-  const coverage = require(`../coverage/coverage-${country}-final.json`);
+for (let i = 0; i < 4; i++) {
+  const coverage = require(`../coverage/coverage-final-${i}.json`);
   Object.keys(coverage).forEach(
     filename => map.addFileCoverage(coverage[filename])
   );
-});
+}
 
-reporter.addAll(['json', 'lcov', 'text']);
+reporter.addAll(['json']);
 reporter.write(map);
