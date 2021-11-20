@@ -77,6 +77,12 @@ jobs:
           name: Map coverage reports
           command: |
             node ./scripts/mapCoverage.js
+      
+      - run:
+          name: Check merged report
+          command: |
+            ls
+            ls coverage
 
 workflows:
   test_and_report:
