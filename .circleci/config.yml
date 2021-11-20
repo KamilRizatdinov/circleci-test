@@ -65,8 +65,12 @@ jobs:
       - run:
           name: List coverage content
           command: |
-            ls
             ls coverage
+      
+      - run:
+          name: Map coverage reports
+          command: |
+            node ./scripts/mapCoverage.js
 
 workflows:
   test_and_report:
