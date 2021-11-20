@@ -79,7 +79,7 @@ jobs:
       - run:
           name: Map coverage reports
           command: |
-            node ./scripts/mapCoverage.js
+            yarn nyc merge coverage coverage/coverage-final.json
             rm -r coverage/coverage-final-*
             ls coverage
       
