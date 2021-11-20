@@ -81,8 +81,7 @@ jobs:
       - run:
           name: Check merged report
           command: |
-            ls
-            ls coverage
+            cat coverage/coverage-final.json
 
 workflows:
   test_and_report:
