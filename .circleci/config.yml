@@ -78,6 +78,7 @@ jobs:
           command: |
             node ./scripts/mapCoverage.js
             rm -v !("coverage-final.json")
+            ls coverage
       
       - run:
           name: Check merged report
