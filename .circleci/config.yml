@@ -71,5 +71,7 @@ workflows:
   test_and_report:
     jobs:
       - build
-      - report
+      - report:
+          requires: 
+            - build
 
