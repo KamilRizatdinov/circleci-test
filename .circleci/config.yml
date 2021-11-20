@@ -59,6 +59,13 @@ jobs:
     docker:
       - image: circleci/node:12.9.1-browsers
     steps:
+      - checkout
+      
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      
       - attach_workspace:
           at: .
       
