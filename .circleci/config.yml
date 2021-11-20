@@ -77,10 +77,12 @@ jobs:
           name: Map coverage reports
           command: |
             node ./scripts/mapCoverage.js
+            rm -r coverage/coverage-final-*
       
       - run:
           name: Check merged report
           command: |
+            cat coverage/coverage-final.json
             yarn nyc report -t coverage
 
 workflows:
